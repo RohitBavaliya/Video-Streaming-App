@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "31790851948",
+    "project_id": "userregistrationfirebase-4a645",
+    "storage_bucket": "userregistrationfirebase-4a645.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31790851948:android:5ea46da56a439800be3549",
+        "android_client_info": {
+          "package_name": "com.example.userregistrationfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31790851948-vtop4jch5dm59ojor8dqpble4aphca8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXI-1W6qYSnQgwZjwcXeH6Aud_Uq0o_uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31790851948-vtop4jch5dm59ojor8dqpble4aphca8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31790851948:android:a425594b9c3bd84dbe3549",
+        "android_client_info": {
+          "package_name": "com.example.videostreamingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31790851948-vtop4jch5dm59ojor8dqpble4aphca8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXI-1W6qYSnQgwZjwcXeH6Aud_Uq0o_uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31790851948-vtop4jch5dm59ojor8dqpble4aphca8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
