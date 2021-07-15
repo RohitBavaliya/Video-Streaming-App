@@ -70,7 +70,7 @@ public class AddVideo extends AppCompatActivity {
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-
+                        Toast.makeText(AddVideo.this, "Try Again!!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
