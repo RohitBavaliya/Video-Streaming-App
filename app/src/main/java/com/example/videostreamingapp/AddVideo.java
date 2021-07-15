@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -23,6 +25,8 @@ public class AddVideo extends AppCompatActivity {
     VideoView videoView;
     Uri videoUri;
     MediaController controller;
+    StorageReference storageReference;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,9 @@ public class AddVideo extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK)
         {
+            // fetch videoUri from Intent
             videoUri = data.getData();
+            // set Uri in videoView
             videoView.setVideoURI(videoUri);
         }
     }

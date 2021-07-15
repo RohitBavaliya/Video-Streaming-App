@@ -17,6 +17,7 @@ public class DashBoard extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
 
         addVideo = (FloatingActionButton) findViewById(R.id.addVideo);
+
         addVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
