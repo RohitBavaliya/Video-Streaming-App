@@ -1,19 +1,30 @@
 package com.example.videostreamingapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -27,6 +38,7 @@ public class AddVideo extends AppCompatActivity {
     MediaController controller;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    EditText videoTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,10 @@ public class AddVideo extends AppCompatActivity {
         controller = new MediaController(this);
         videoView.setMediaController(controller);
         videoView.start();
+
+        videoTitle = (EditText) findViewById(R.id.videoTitle);
+        databaseReference = FirebaseDatabase.getInstance().getReference("videos");
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     public void browse(View view) {
@@ -76,6 +92,56 @@ public class AddVideo extends AppCompatActivity {
         }
     }
 
+    public String getExtension()
+    {
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(getContentResolver().getType(videoUri));
+    }
+
     public void upload(View view) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("File Uploader");
+        progressDialog.show();
+
+        final StorageReference uploader= storageReference.child("myVideos/"+System.currentTimeMillis()+"."+getExtension());
+
+        // upload file in Firebase Storage
+        uploader.putFile(videoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                // get video url from Firebase Storage
+                uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        FileModel fileModel = new FileModel(videoTitle.getText().toString(),uri.toString());
+                        //set data in realtime database
+                        databaseReference.child(databaseReference.push().getKey()).setValue(fileModel)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(AddVideo.this, "File Uploaded..", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull  Exception e) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(AddVideo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double percentage = (100 * snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        progressDialog.setMessage("Uploaded "+(int)percentage+"%");
+                    }
+                });
     }
 }
