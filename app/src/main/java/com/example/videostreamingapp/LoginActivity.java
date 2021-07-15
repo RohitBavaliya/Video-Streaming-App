@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout userEmail, userPassword;
@@ -32,6 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.userPwd);
 
         loginProgressBar = findViewById(R.id.loginProgressBar);
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser!=null)
+        {
+            startActivity(new Intent(getApplicationContext(),DashBoard.class));
+            finish();
+        }
     }
 
     public void login(View view) {
