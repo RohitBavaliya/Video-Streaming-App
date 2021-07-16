@@ -122,7 +122,7 @@ public class AddVideo extends AppCompatActivity {
                                     public void onSuccess(Void unused) {
                                         progressDialog.dismiss();
                                         Toast.makeText(AddVideo.this, "File Uploaded..", Toast.LENGTH_SHORT).show();
-
+                                        startActivity(new Intent(getApplicationContext(),DashBoard.class));
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -130,6 +130,7 @@ public class AddVideo extends AppCompatActivity {
                                     public void onFailure(@NonNull  Exception e) {
                                         progressDialog.dismiss();
                                         Toast.makeText(AddVideo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(),DashBoard.class));
                                     }
                                 });
                     }
