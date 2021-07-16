@@ -38,18 +38,27 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.0'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.2'
+    implementation 'androidx.media2:media2-exoplayer:1.0.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.karumi:dexter:6.2.3'
 
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.X.X'
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.X.X'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.X.X'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.X.X'
+    // dependancy for exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
+    // for core support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
+    // for adding dash support in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
+    // for adding hls support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
+    // for smooth streaming of video in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
+    // for generating default ui of exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
 
-    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.firebaseui:firebase-ui-database:7.2.0'
 }
