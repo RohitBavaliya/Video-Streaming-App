@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginProgressBar = findViewById(R.id.loginProgressBar);
 
+        // user already login than direct open Dashboard
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser!=null)
         {
